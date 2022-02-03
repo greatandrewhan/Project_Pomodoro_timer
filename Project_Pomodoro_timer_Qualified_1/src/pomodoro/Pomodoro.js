@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import classNames from "../utils/class-names";
 import useInterval from "../utils/useInterval";
 
-import Break from "./Break";
-import Focus from "./Focus";
+
+import DurationTimer from "./DurationTimer";
 import Session from "./Session";
 
 // These functions are defined outside of the component to ensure they do not have access to state
@@ -57,7 +57,7 @@ function Pomodoro() {
   // The current session - null where there is no session running
   const [session, setSession] = useState(null);
   const [focusDuration, setFocusDuration] = useState(25);
-  const [breakDuration, setBreakDuration] = useState(5);
+  const [breakDuration, setBreackDuration] = useState(5);
 
   // ToDo: Allow the user to adjust the focus and break duration.
   // const focusDuration = 25;
@@ -102,21 +102,21 @@ function Pomodoro() {
     });
   }
 
-  const increaseFocusTime = () => {
-    setFocusDuration((value) => Math.min(60, value + 5));
-  };
+//   const increaseFocusTime = () => {
+//     setFocusDuration((value) => Math.min(60, value + 5));
+//   };
 
-  const decreaseFocusTime = () => {
-    setFocusDuration((value) => Math.max(5, value - 5));
-  };
+//   const decreaseFocusTime = () => {
+//     setFocusDuration((value) => Math.max(5, value - 5));
+//   };
 
-  const increaseBreakTime = () => {
-    setBreakDuration((value) => Math.min(15, value + 1));
-  };
+//   const increaseBreakTime = () => {
+//     setBreackDuration((value) => Math.min(15, value + 1));
+//   };
 
-  const decreaseBreakTime = () => {
-    setBreakDuration((value) => Math.max(1, value - 1));
-  };
+//   const decreaseBreakTime = () => {
+//     setBreackDuration((value) => Math.max(1, value - 1));
+//   };
 
   const stopButtonHandler = () => {
     setIsTimerRunning(false);
@@ -127,19 +127,21 @@ function Pomodoro() {
     <div className="pomodoro">
       <div className="row">
         <div className="col">
-          <Focus
-            focusDuration={focusDuration}
-            increaseFocusTime={increaseFocusTime}
-            decreaseFocusTime={decreaseFocusTime}
+          <DurationTimer
+            Duration={focusDuration}
+            setDuration={setFocusDuration}
             isTimerRunning={isTimerRunning}
+            type='Focus'
+            
+            
           />
         </div>
         <div className="col">
           <div className="float-right">
             <Break
               breakDuration={breakDuration}
-              increaseBreakTime={increaseBreakTime}
-              decreaseBreakTime={decreaseBreakTime}
+              setBreakDuration={setBreakDuration}
+              
               isTimerRunning={isTimerRunning}
             />
           </div>
